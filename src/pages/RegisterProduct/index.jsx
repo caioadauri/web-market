@@ -1,28 +1,30 @@
 import { useState } from "react";
-import { Container, Form } from "./styles";
+import { Container } from "./styles";
 import { FiDollarSign, FiBox, FiPaperclip, FiPackage } from 'react-icons/fi';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { api } from "../../services/api";
 
 import { Input } from "../../components/input";
 import { Button } from "../../components/Button";
+import { Checkbox } from "../../components/Checkbox";
 
 
 export function RegisterProduct() {
     const [nome, setNome] = useState("")
     const [preco, setPreco] = useState("")
     const [quantidade, setQuantidade] = useState("")
-    const [status, setStatus] = useState("false")
+    const [status, setStatus] = useState("")
     const [imagem, setImagem] = useState("")
 
     const navigate = useNavigate()
-    
+
     function handleRegisterProduct() {
         if (!nome || !preco || !quantidade || !imagem) {
             return alert("Preencha todos os campos!")
         }
+
 
         api.post("/cadastro_produto", { nome, preco, quantidade, status, imagem })
             .then(() => {
@@ -77,10 +79,15 @@ export function RegisterProduct() {
                     icon={FiPaperclip}
                     onChange={e => setImagem(e.target.files[0])}
                 />
-
+                
+                <Checkbox 
+                    id="checkboxStatus"
+                    label="Marque para ativar o produto"
+                    checked={status}
+                    onChange={(e) => setStatus(e.target.checked)}
+                />
 
                 <Button title="Cadastrar" onClick={handleRegisterProduct} />
-
 
             </Form>
         </Container>
