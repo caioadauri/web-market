@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import backgroundImg from '../../assets/supermarket.jpg'
 
 export const Container = styled.div`
   height: 100vh;
@@ -36,4 +37,10 @@ text-align: center;
   color: ${({ theme }) => theme.COLORS.GREEN};
 }
 
+`;
+
+export const Background = styled.div`
+  flex: 1;
+  background: url(${backgroundImg}) no-repeat center center;
+  background-size: cover;
 `;

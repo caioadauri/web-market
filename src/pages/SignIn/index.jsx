@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container, Form } from "./styles";
+import { Background, Container, Form } from "./styles";
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
 
 import { useAuth } from "../../hooks/auth";
@@ -48,6 +48,7 @@ export function SignIn() {
         </Link>
 
       </Form>
+      <Background />
     </Container>
   )
   

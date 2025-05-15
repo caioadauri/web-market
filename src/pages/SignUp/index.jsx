@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container, Form } from "./styles";
+import { Background, Container, Form } from "./styles";
 import { FiLogIn, FiMail, FiLock, FiUser, FiTrello, FiSmartphone } from 'react-icons/fi';
 
 import { Link, useNavigate } from 'react-router-dom';
@@ -87,6 +87,7 @@ export function SignUp() {
 
       
       </Form>
+      <Background />
     </Container>
   )
 
