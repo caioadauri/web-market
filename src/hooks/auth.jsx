@@ -28,6 +28,13 @@ function AuthProvider({ children }) {
     }
   }
 
+  function signOut() {
+    localStorage.removeItem('@rocketnotes:token')
+    localStorage.removeItem('@rocketnotes:user')
+
+    setData({})
+  }
+
   useEffect(() => {
     const token = localStorage.getItem('@web-market:token')
     const user = localStorage.getItem('@web-market:user')
@@ -45,6 +52,7 @@ function AuthProvider({ children }) {
   return (
     <AuthContext.Provider value={{
       signIn,
+      signOut,
       user: data.user
     }}>
       {children}
