@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FiPlus } from 'react-icons/fi';
-import {Brand, Container, Menu, Search, Content, NewProduct} from './styles'
+import { Brand, Container, Menu, Search, Content, NewProduct } from './styles';
 
 import { Header } from '../../components/Header'
 import { ButtonText } from '../../components/ButtonText'
@@ -12,40 +12,43 @@ import { api } from '../../services/api';
 
 export function Home() {
 
-  const [ search, setSearch ] = useState("")
-  const [ tags, setTags ] = useState([])
-  const [ tagsSelected, setTagsSelected ] = useState([])
-  const [ products, setProducts ] = useState([])
+  const [search, setSearch] = useState("");
+  const [products, setProducts] = useState([]);
 
-  const navigate = useNavigate()
+   const navigate = useNavigate();
 
-  function handleTagSelected(tagName) {
-    if (tagName === 'all') {
-      return setTagsSelected([])
-    }
-
-    function handleDetails(id) {
-      navigate(`/produto/${id}`)
-    }
-
-    const alreadySelected = tagsSelected.includes(tagName)
-    if (alreadySelected){
-      const filteredTags = tagsSelected.filter(tag => tag !== tagName)
-      setTagsSelected(filteredTags)
-    } else {
-      setTagsSelected(prevState => [...prevState, tagName])
-    }
-  }
-
-  useEffect(() => {
+   function handleDetails(id) {
+    navigate(`/produto/${id}`);
+   }
+  
     async function fetchProducts() {
+      try {
       const response = await api.get(`/produtos`);
       console.log("RESPONSE:", response.data);
       setProducts(response.data)
+      } catch (error) {
+        console.error("Erro ao buscar produtos", error);
+      }
     }
 
+useEffect(() => {
     fetchProducts()
 }, [])
+
+  async function handleDeleteProduct(id) {
+    try {
+      await api.delete(`/produtos/${id}`);
+      alert("Produto excluído com sucesso!");
+      fetchProducts();
+    } catch (error) {
+      console.error(error);
+      alert("Erro ao excluir produto.");
+    }
+  }
+
+  const filteredProducts = products.filter(product =>
+    product.nome.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <Container>
@@ -66,7 +69,8 @@ export function Home() {
 
       <Search>
         <Input 
-        placeholder="Pesquisar pelo produto" 
+        placeholder="Pesquisar pelo produto"
+        value={search} 
         onChange={(e) => setSearch(e.target.value)}
         />
       </Search>
@@ -75,15 +79,20 @@ export function Home() {
       <Content>
         <Section title="Meus produtos">
           {
-          products.map(product => (
-          <ProductCard
-            key={String(product.id)}
-            data={product}
-            onClick={() => handleDetails(product.id)}
-          />
-        ))
-    }
-  </Section>
+            filteredProducts.length > 0 ? (
+              filteredProducts.map(product => (
+                <ProductCard
+                  key={String(product.id)}
+                  data={product}
+                  onClick={() => handleDetails(product.id)}
+                  onDelete={handleDeleteProduct}
+                />
+              ))
+            ) : (
+              <p>Nenhum produto encontrado.</p>
+            )
+          }
+        </Section>
 </Content>
       </Content>
 

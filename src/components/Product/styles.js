@@ -14,6 +14,7 @@ export const Container = styled.button`
   align-items: flex-start;
   gap: 12px;
   cursor: pointer;
+  position: relative;
 
   transition: transform 0.2s ease;
 
@@ -29,7 +30,7 @@ export const Container = styled.button`
     background-color: ${({ theme }) => theme.COLORS.BACKGROUND_600};
   }
 
-  > h1 {
+  > h2 {
     font-weight: 700;
     font-size: 20px;
     color: ${({ theme }) => theme.COLORS.WHITE};
@@ -39,5 +40,38 @@ export const Container = styled.button`
   > p {
     font-size: 14px;
     color: ${({ theme }) => theme.COLORS.GRAY_100};
+  }
+`;
+
+export const EditIcon = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: ${({ theme }) => theme.COLORS.GREEN};
+  padding: 6px;
+  border-radius: 50%;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
+  }
+`;
+
+export const DeleteIcon = styled.div`
+  background: ${({ theme }) => theme.COLORS.RED};
+  padding: 6px;
+  border-radius: 50%;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
   }
 `;
