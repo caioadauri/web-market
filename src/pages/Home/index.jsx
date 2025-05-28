@@ -46,6 +46,10 @@ useEffect(() => {
     }
   }
 
+  function handleSell(product) {
+  navigate(`/produto/${product.id}/venda`);
+}
+
   const filteredProducts = products.filter(product =>
     product.nome.toLowerCase().includes(search.toLowerCase())
   );
@@ -86,6 +90,7 @@ useEffect(() => {
                   data={product}
                   onClick={() => handleDetails(product.id)}
                   onDelete={handleDeleteProduct}
+                  onSell={handleSell}
                 />
               ))
             ) : (

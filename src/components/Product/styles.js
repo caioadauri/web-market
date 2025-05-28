@@ -41,12 +41,18 @@ export const Container = styled.button`
     font-size: 14px;
     color: ${({ theme }) => theme.COLORS.GRAY_100};
   }
+
+  .actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    display: flex;
+    gap: 8px;
+  }
 `;
 
 export const EditIcon = styled.div`
-  position: absolute;
-  top: 10px;
-  right: 10px;
   background: ${({ theme }) => theme.COLORS.GREEN};
   padding: 6px;
   border-radius: 50%;
@@ -73,5 +79,23 @@ export const DeleteIcon = styled.div`
 
   svg {
     color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
+  }
+`;
+
+export const SellButton = styled.div`
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background-color: ${({ theme }) => theme.COLORS.GREEN};
+  color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(0.9);
   }
 `;

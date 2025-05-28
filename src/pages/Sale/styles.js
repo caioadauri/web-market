@@ -1,0 +1,51 @@
+import styled from 'styled-components';
+
+export const Container = styled.div`
+  width: 100%;
+  height: 100vh;
+
+  display: grid;
+  grid-template-rows: 105px auto;
+  grid-template-areas:
+    "header"
+    "content";
+
+  > main {
+    grid-area: content;
+    overflow-y: auto;
+  }
+
+  section label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: ${({ theme }) => theme.COLORS.GRAY_100};
+    margin-top: 8px;
+  }
+`;
+
+export const Form = styled.form`
+  max-width: 550px;
+  margin: 38px auto;
+
+  > header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 36px;
+
+    button {
+      font-size: 20px;
+      color: ${({ theme }) => theme.COLORS.GRAY_100};
+    }
+  }
+
+  .total {
+    font-size: 18px;
+    font-weight: bold;
+    color: ${({ theme }) => theme.COLORS.WHITE};
+    margin-top: 16px;
+  }
+`;

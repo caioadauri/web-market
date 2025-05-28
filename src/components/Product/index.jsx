@@ -1,9 +1,9 @@
-import { Container, EditIcon, DeleteIcon } from './styles';
+import { Container, EditIcon, DeleteIcon, SellButton } from './styles';
 import { api } from '../../services/api';
 import { FiEdit2, FiTrash2 } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 
-export function ProductCard({ data, onClick, onDelete }) {
+export function ProductCard({ data, onClick, onDelete, onSell }) {
   const navigate = useNavigate();
 
   function handleEdit(e) {
@@ -16,6 +16,11 @@ export function ProductCard({ data, onClick, onDelete }) {
     if (confirm(`Tem certeza que deseja excluir o produto "${data.nome}"?`)) {
       onDelete(data.id);
     }
+  }
+
+  function handleSell(e) {
+    e.stopPropagation();
+    onSell(data);
   }
 
   return (
@@ -33,6 +38,10 @@ export function ProductCard({ data, onClick, onDelete }) {
       <p>Preço: R$ {data.preco.toFixed(2)}</p>
       <p>Quantidade: {data.quantidade}</p>
       <p>Status: {data.status ? 'Ativo' : 'Inativo'}</p>
+
+      <SellButton onClick={handleSell}>
+        Vender
+      </SellButton>
     </Container>
   );
 }
