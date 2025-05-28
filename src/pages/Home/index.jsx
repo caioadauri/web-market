@@ -69,6 +69,12 @@ useEffect(() => {
           isActive={false}
         />
       </li>
+      <li>
+    <ButtonText
+      title="Relatórios"
+      onClick={() => navigate("/relatorio")}
+    />
+  </li>
       </Menu>
 
       <Search>
